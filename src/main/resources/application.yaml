@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: Spring Observability
+management:
+  endpoint:
+    metrics:
+      enabled: on
+    info:
+      enabled: on
+  tracing:
+    propagation:
+      type: w3c
+      consume: w3c
+      produce: w3c
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      compression: none
+      endpoint: https://api.honeycomb.io:443/v1/traces
+      headers:
+        x-honeycomb-team: ${HONEYCOMB_TOKEN}
+    metrics:
+      export:
+        enabled: on
+        step: 5s
+        url: https://api.honeycomb.io:443/v1/metrics
+        headers:
+          x-honeycomb-team: ${HONEYCOMB_TOKEN}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
