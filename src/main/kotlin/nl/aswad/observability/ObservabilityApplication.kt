@@ -9,5 +9,8 @@ import org.springframework.boot.runApplication
 class ObservabilityApp
 
 fun main(args: Array<String>) {
+    assert(System.getenv("HONEYCOMB_TOKEN") != null) {
+        "HONEYCOMB_TOKEN environment variable is missing"
+    }
     runApplication<ObservabilityApp>(*args)
 }
