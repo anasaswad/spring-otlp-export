@@ -26,7 +26,7 @@ management:
       endpoint: https://api.honeycomb.io:443/v1/traces
       headers:
         x-honeycomb-team: ${HONEYCOMB_TOKEN}
-        x-honeycomb-dataset: Spring Observability
+        x-honeycomb-dataset: ${spring.application.name}
     metrics:
       export:
         enabled: on
@@ -34,7 +34,7 @@ management:
         url: https://api.honeycomb.io:443/v1/metrics
         headers:
           x-honeycomb-team: ${HONEYCOMB_TOKEN}
-          x-honeycomb-dataset: Spring Observability Metrics
+          x-honeycomb-dataset: ${spring.application.name} Metrics
   endpoints:
     web:
       exposure:
