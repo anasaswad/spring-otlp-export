@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: Spring Observability
+management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  endpoint:
+    metrics:
+      enabled: on
+    info:
+      enabled: on
+  tracing:
+    propagation:
+      type: w3c
+      consume: w3c
+      produce: w3c
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      compression: gzip
+      endpoint: https://api.honeycomb.io:443/v1/traces
+      headers:
+        x-honeycomb-team: ${HONEYCOMB_TOKEN}
+        x-honeycomb-dataset: Spring Observability
+    metrics:
+      export:
+        enabled: on
+        step: 5s
+        url: https://api.honeycomb.io:443/v1/metrics
+        headers:
+          x-honeycomb-team: ${HONEYCOMB_TOKEN}
+          x-honeycomb-dataset: Spring Observability Metrics
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 80
+  error:
+    include-exception: true
+  http2:
+    enabled: true
+  shutdown: graceful
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+service:
+  beta:
+    url: http://localhost:8080/

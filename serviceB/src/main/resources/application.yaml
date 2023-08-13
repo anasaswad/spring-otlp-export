@@ -1,7 +1,13 @@
 spring:
   application:
-    name: Spring Observability
+    name: Service Beta
 management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
   endpoint:
     metrics:
       enabled: on
@@ -16,10 +22,11 @@ management:
       probability: 1.0
   otlp:
     tracing:
-      compression: none
+      compression: gzip
       endpoint: https://api.honeycomb.io:443/v1/traces
       headers:
         x-honeycomb-team: ${HONEYCOMB_TOKEN}
+        x-honeycomb-dataset: Service Beta
     metrics:
       export:
         enabled: on
@@ -27,7 +34,18 @@ management:
         url: https://api.honeycomb.io:443/v1/metrics
         headers:
           x-honeycomb-team: ${HONEYCOMB_TOKEN}
+          x-honeycomb-dataset: Service Beta Metrics
   endpoints:
     web:
       exposure:
         include: '*'
+server:
+  port: 8080
+  error:
+    include-exception: true
+  http2:
+    enabled: true
+  shutdown: graceful
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
