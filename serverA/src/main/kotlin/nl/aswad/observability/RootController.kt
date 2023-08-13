@@ -25,6 +25,10 @@ class RootController(
 
     val webClient = webClientBuilder
         .baseUrl(baseUrl)
+        .filter { request, next ->
+            LOG.info("sending request: {}, headers: {}", request.url(), request.headers())
+            next.exchange(request)
+        }
         .build()
 
     @GetMapping

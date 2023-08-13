@@ -15,9 +15,10 @@ management:
       enabled: on
   tracing:
     propagation:
-      type: w3c
-      consume: w3c
-      produce: w3c
+      type:
+        - b3
+        - b3_multi
+        - w3c
     sampling:
       probability: 1.0
   otlp:
