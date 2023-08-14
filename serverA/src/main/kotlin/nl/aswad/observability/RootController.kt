@@ -1,8 +1,7 @@
 package nl.aswad.observability
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.micrometer.observation.Observation
-import io.micrometer.observation.ObservationRegistry
+import io.micrometer.tracing.Tracer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -14,7 +13,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 class RootController(
-    val registry: ObservationRegistry,
+    val tracer: Tracer,
     webClientBuilder: WebClient.Builder,
     @Value("\${service.beta.url}") baseUrl: String
 ) {
@@ -32,9 +31,9 @@ class RootController(
         .build()
 
     @GetMapping
-    fun list(context: Observation.Context): Mono<Input> {
-        registry.currentObservation?.lowCardinalityKeyValue("name", "list()")
-        LOG.info("new list request: {}", context.name)
+    fun list(): Mono<Input> {
+        val span = tracer.currentSpan() ?: throw AssertionError("missing span")
+        LOG.info("new list request with traceId: {}", span.context().traceId())
         return webClient
             .post()
             .body(BodyInserters.fromValue(Input("test")))

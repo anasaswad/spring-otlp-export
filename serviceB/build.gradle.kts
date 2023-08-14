@@ -26,6 +26,7 @@ dependencies {
     implementation("io.micrometer:micrometer-tracing")
     implementation("io.micrometer:micrometer-registry-otlp")
     implementation("io.micrometer:micrometer-tracing-bridge-otel")
+    implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")
     implementation("io.projectreactor:reactor-core-micrometer")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
