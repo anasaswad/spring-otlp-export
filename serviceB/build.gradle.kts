@@ -31,6 +31,9 @@ dependencies {
     implementation("io.projectreactor:reactor-core-micrometer")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
+    runtimeOnly(project(":otel-appender"))
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
