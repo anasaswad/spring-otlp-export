@@ -47,7 +47,7 @@ class KafkaResolver(
             .map { result ->
                 DataAsset(
                     result.name,
-                    "test description", listOf(1, 2, 4, 5, 9)
+                    "test description", listOf("1", "2", "4", "5", "9")
                 )
             }
     }

@@ -29,6 +29,6 @@ class GraphQLController(
 
     @SchemaMapping(typeName = "DataAsset", field = "tags")
     fun getAuthor(dataAsset: DataAsset): List<String> {
-        return dataAsset.tags.map { index -> java.lang.String.format("tag-%d", index) }
+        return dataAsset.tags.map { index -> "tag-$index" }
     }
 }

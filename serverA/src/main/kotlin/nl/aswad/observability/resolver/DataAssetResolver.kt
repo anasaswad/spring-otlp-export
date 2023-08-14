@@ -12,7 +12,7 @@ class DataAssetResolver(val registry: ObservationRegistry) {
     fun find(fqn: String): Mono<DataAsset> {
         return Mono.just<DataAsset>(
             DataAsset(
-                fqn, String.format("auto generated description for %s", fqn), listOf(1, 9))
+                fqn, String.format("auto generated description for %s", fqn), listOf("1", "9"))
         )
             .name("dataAsset.find")
             .tag("fqn", fqn)
