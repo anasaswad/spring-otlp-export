@@ -21,6 +21,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-graphql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("io.micrometer:context-propagation")
 	implementation("io.micrometer:micrometer-tracing")
@@ -31,7 +32,10 @@ dependencies {
 	implementation("io.projectreactor:reactor-core-micrometer")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+	implementation(project(":otel-propagator"))
+
 	runtimeOnly(project(":otel-appender"))
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

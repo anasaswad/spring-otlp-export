@@ -1,6 +1,17 @@
 spring:
+  main:
+    banner-mode: console
+    web-application-type: reactive
   application:
     name: Spring Observability
+  graphql:
+    schema:
+      printer:
+        enabled: true
+    graphiql:
+      enabled: true
+      path: "ui"
+    path: "/"
 management:
   metrics:
     distribution:

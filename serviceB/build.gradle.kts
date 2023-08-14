@@ -31,6 +31,7 @@ dependencies {
     implementation("io.projectreactor:reactor-core-micrometer")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation(project(":otel-propagator"))
 
     runtimeOnly(project(":otel-appender"))
 
