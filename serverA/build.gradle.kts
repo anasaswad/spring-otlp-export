@@ -43,6 +43,7 @@ dependencies {
 	implementation(project(":otel-propagator"))
 
 	runtimeOnly(project(":otel-appender"))
+	implementation("io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0:1.28.0-alpha")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

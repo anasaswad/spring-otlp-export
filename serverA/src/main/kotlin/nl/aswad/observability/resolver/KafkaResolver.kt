@@ -1,6 +1,7 @@
 package nl.aswad.observability.resolver
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.micrometer.observation.ObservationRegistry
 import io.micrometer.tracing.Tracer
 import nl.aswad.observability.dto.DataAsset
 import nl.aswad.observability.dto.KafkaInput
@@ -10,12 +11,14 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import reactor.core.observability.micrometer.Micrometer
 import reactor.core.publisher.Mono
 
 @Component
 class KafkaResolver(
     val tracer: Tracer,
     webClientBuilder: WebClient.Builder,
+    val registry: ObservationRegistry,
     @Value("\${service.beta.url}") baseUrl: String
 ) {
 

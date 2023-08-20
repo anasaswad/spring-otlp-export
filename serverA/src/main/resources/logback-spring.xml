@@ -3,8 +3,11 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <appender name="OpenTelemetry" class="nl.aswad.otlp.logback.OpenTelemetryAppender"/>
+    <appender name="CONSOLE_OTEL" class="io.opentelemetry.instrumentation.logback.mdc.v1_0.OpenTelemetryAppender">
+        <appender-ref ref="CONSOLE" />
+    </appender>
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE_OTEL"/>
         <appender-ref ref="OpenTelemetry"/>
     </root>
 </configuration>
